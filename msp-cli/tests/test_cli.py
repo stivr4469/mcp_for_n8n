@@ -114,3 +114,29 @@ def test_integration_parse_generate_validate(tmp_path):
         # но команда должна выполниться без ошибок в логике валидации CLI.
         # Для этого теста проверим только выполнение команды.
         # assert result_validate.exit_code == 0 # Этот assert может быть не всегда верным.
+
+
+def test_deploy_command_missing_file():
+    """Тест для CLI-команды deploy с несуществующим файлом."""
+    with runner.isolated_filesystem():
+        result = runner.invoke(app, ["deploy", "run", "nonexistent.json"])
+        assert result.exit_code == 1
+        assert "не найден" in result.stdout
+
+
+def test_deploy_command_invalid_json(monkeypatch):
+    """Тест для CLI-команды deploy с невалидным JSON файлом."""
+    # Мокаем config, чтобы не требовать настоящего API ключа для этого теста
+    from msp_agent.core.config import Config, N8nConfig
+    mock_config = Config(n8n=N8nConfig(url="http://test.n8n.local:5678", api_key="test_key"))
+    # Импортируем модуль, где определена функция, которую хотим заменить
+    from cli.commands import deploy
+    monkeypatch.setattr(deploy, 'load_config', lambda: mock_config)
+
+    with runner.isolated_filesystem():
+        with open("invalid.json", 'w', encoding='utf-8') as f:
+            f.write("это не json")
+
+        result = runner.invoke(app, ["deploy", "run", "invalid.json"])
+        assert result.exit_code == 1
+        assert "Невалидный JSON" in result.stdout

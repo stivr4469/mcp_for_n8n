@@ -1,0 +1,25 @@
+{
+  "name": "Отправить письмо",
+  "nodes": [
+    {
+      "parameters": {
+        "description": "Отправить письмо пользователю",
+        "to": "user@example.com",
+        "subject": "Subject from MSP",
+        "text": "Text from MSP"
+      },
+      "id": "1",
+      "name": "Email",
+      "type": "n8n-nodes-base.email",
+      "typeVersion": 1,
+      "position": [
+        200,
+        200
+      ]
+    }
+  ],
+  "connections": [],
+  "active": false,
+  "settings": {},
+  "versionId": "placeholder_version_id"
+}
