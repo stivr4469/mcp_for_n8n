@@ -1,0 +1,17 @@
+{
+  "parameters": {
+    {% for key, value in node.parameters.parameters.items() %}
+    "{{ key }}": {{ value | tojson }},
+    {% endfor %}
+    "url": "https://example.com/api/endpoint",
+    "method": "GET"
+  },
+  "id": "{{ node.id }}",
+  "name": "{{ node.name }}",
+  "type": "{{ node.type }}",
+  "typeVersion": 1,
+  "position": [
+    {{ node.position[0] if node.position else 100 }},
+    {{ node.position[1] if node.position else 100 }}
+  ]
+}

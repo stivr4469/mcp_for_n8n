@@ -1,0 +1,24 @@
+{
+  "name": "Отправить письмо пос",
+  "nodes": [
+    {
+      "parameters": {
+        "description": "Отправить письмо после получения формы",
+        "url": "https://example.com/api/endpoint",
+        "method": "GET"
+      },
+      "id": "1",
+      "name": "Httprequest",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [
+        100,
+        100
+      ]
+    }
+  ],
+  "connections": [],
+  "active": false,
+  "settings": {},
+  "versionId": "placeholder_version_id"
+}

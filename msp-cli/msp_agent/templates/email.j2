@@ -1,0 +1,18 @@
+{
+  "parameters": {
+    {% for key, value in node.parameters.parameters.items() %}
+    "{{ key }}": {{ value | tojson }},
+    {% endfor %}
+    "to": "user@example.com",
+    "subject": "Subject from MSP",
+    "text": "Text from MSP"
+  },
+  "id": "{{ node.id }}",
+  "name": "{{ node.name }}",
+  "type": "{{ node.type }}",
+  "typeVersion": 1,
+  "position": [
+    {{ node.position[0] if node.position else 200 }},
+    {{ node.position[1] if node.position else 200 }}
+  ]
+}
